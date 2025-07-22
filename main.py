@@ -10,7 +10,7 @@ def init_json():
 
     with open("budget.json", "w") as file:
         json.dump(dict, file, indent=4)
-        
+
 
 def main():
     init_json()
