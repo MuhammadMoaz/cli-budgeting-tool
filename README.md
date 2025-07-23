@@ -1,8 +1,9 @@
 # cli-budgeting-tool
 
 To-do:
-- Function to add expense
+- Function to add expense/income
     - Expense name
+    - type (expense, income)
     - Id
     - Frequency (One-time, daily, weekly, monthly, yearly, etc)
     - Amount
