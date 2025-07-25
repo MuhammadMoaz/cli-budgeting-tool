@@ -1,5 +1,6 @@
 import json
 import shlex
+from datetime import datetime
 
 def init_json():
     dict = {
@@ -27,9 +28,8 @@ def generate_id():
 
         # Return id
         return id
-
-def add_item(item_name):
-    # Get item type
+    
+def get_item_type():
     while True:
         item_type = input("[1] Expense or [2] Income:")
         if item_type == "1":
@@ -40,24 +40,48 @@ def add_item(item_name):
             break
         else:
             print("Invalid input!")
+    
+    return item_type
 
-    # Get payment amnt
-    payment_amnt = input("Amount:")
+def get_payment_amnt():
+    while True:
+        try:
+            return int(input("Amount:"))
+        except ValueError:
+            print("NaN")
+        except:
+            print("Invalid Input")
 
-    # Get payment freq
-    payment_freq = input("Payment Frequency:")
+def get_payment_freq():
+    payment_freq_list = ["Daily", "Weekly", "Biweekly", "Monthly", "Quarterly", "Yearly"]
 
-    # Get payment date
-    payment_date = input("Payment Date:")
+    while True:
+        payment_freq = input("Payment Frequency:").title()
+        if payment_freq in payment_freq_list:
+            return payment_freq
+        else:
+            print("Invalid Input")
 
-    item_dict = {
+def get_payment_date():
+    while True:
+        payment_date = input("Payment Date (DD-MM-YYYY):")
+        try:
+            return str(datetime.strptime(payment_date, "%d-%m-%Y").date())
+        except ValueError:
+            print("Not a real date")
+
+def get_item_details(item_name):
+    return {
         "id": generate_id(),
         "item_name": item_name,
-        "item_type": item_type,
-        "payment_amnt": payment_amnt,
-        "payment_freq": payment_freq,
-        "payment_date": payment_date
+        "item_type": get_item_type(),
+        "payment_amnt": get_payment_amnt(),
+        "payment_freq": get_payment_freq(),
+        "payment_date": get_payment_date()
     }
+
+def add_item(item_name):
+    item_dict = get_item_details(item_name)
 
     with open("budget.json", "r+") as file:
         file_data = json.load(file)

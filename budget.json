@@ -5,9 +5,9 @@
             "id": 1,
             "item_name": "spotify",
             "item_type": "Expense",
-            "payment_amnt": "10",
+            "payment_amnt": 10,
             "payment_freq": "Monthly",
-            "payment_date": "27/07/2025"
+            "payment_date": "2025-07-27"
         }
     ]
 }
