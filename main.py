@@ -29,13 +29,34 @@ def generate_id():
         return id
 
 def add_item(item_name):
+    # Get item type
+    while True:
+        item_type = input("[1] Expense or [2] Income:")
+        if item_type == "1":
+            item_type = "Expense"
+            break
+        elif item_type == "2":
+            item_type = "Income"
+            break
+        else:
+            print("Invalid input!")
+
+    # Get payment amnt
+    payment_amnt = input("Amount:")
+
+    # Get payment freq
+    payment_freq = input("Payment Frequency:")
+
+    # Get payment date
+    payment_date = input("Payment Date:")
+
     item_dict = {
         "id": generate_id(),
         "item_name": item_name,
-        "item_type": "",
-        "payment_amnt": "",
-        "payment_freq": "",
-        "payment_date": ""
+        "item_type": item_type,
+        "payment_amnt": payment_amnt,
+        "payment_freq": payment_freq,
+        "payment_date": payment_date
     }
 
     with open("budget.json", "r+") as file:
