@@ -73,7 +73,7 @@ def get_payment_date():
 def get_item_details(item_name):
     return {
         "id": generate_id(),
-        "item_name": item_name,
+        "item_name": item_name.title(),
         "item_type": get_item_type(),
         "payment_amnt": get_payment_amnt(),
         "payment_freq": get_payment_freq(),
@@ -89,6 +89,25 @@ def add_item(item_name):
         file.seek(0)
         json.dump(file_data, file, indent=4)
     
+def remove_item(item_id):
+    # Read JSON
+    with open("budget.json", "r+") as file:
+        # Load JSON data
+        file_data =  json.load(file)
+
+        # Find the task by item_id
+        for item in file_data["budget"]:
+            if str(item["id"]) == str(item_id):
+                # Delete task
+                file_data["budget"].remove(item) 
+                break
+       
+        file.seek(0)
+        file.truncate()
+
+        # Write updated JSON back to file
+        json.dump(file_data, file, indent=4)
+
 def parse_input(user_input):
     command = shlex.split(user_input)
 
@@ -98,8 +117,9 @@ def parse_input(user_input):
                 add_item(command[1])
         case "update":
             print()
-        case "delete":
-            print()
+        case "remove":
+            if len(command) == 2:
+                remove_item(command[1])
         case "quit":
             print("quitting...")
             exit()
