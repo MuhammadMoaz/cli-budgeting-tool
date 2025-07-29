@@ -1,4 +1,13 @@
 {
     "last_id": 1,
-    "budget": []
+    "budget": [
+        {
+            "id": 1,
+            "item_name": "Spotify",
+            "item_type": "Expense",
+            "payment_amnt": 10,
+            "payment_freq": "Monthly",
+            "payment_date": "2025-09-29"
+        }
+    ]
 }

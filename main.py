@@ -108,6 +108,20 @@ def remove_item(item_id):
         # Write updated JSON back to file
         json.dump(file_data, file, indent=4)
 
+def update_item(item_id):
+    # Read JSON
+    with open("budget.json", "r+") as file:
+        # Load JSON data
+        file_data =  json.load(file)
+
+        # Find the task by item_id
+        for item in file_data["budget"]:
+            if str(item["id"]) == str(item_id):
+                for key, value in item.items():
+                    print(f"{key}: {value}")
+                break
+
+
 def parse_input(user_input):
     command = shlex.split(user_input)
 
@@ -116,7 +130,8 @@ def parse_input(user_input):
             if len(command) == 2:
                 add_item(command[1])
         case "update":
-            print()
+            if len(command) == 2:
+                update_item(command[1])
         case "remove":
             if len(command) == 2:
                 remove_item(command[1])
