@@ -1,5 +1,6 @@
 import json
 import shlex
+import os
 from datetime import datetime
 
 def init_json():
@@ -12,7 +13,10 @@ def init_json():
 
     with open("budget.json", "w") as file:
         json.dump(dict, file, indent=4)
-        
+
+def clear_console():
+    os.system('cls')
+
 def generate_id():
     # Open JSON for reading
     with open("budget.json", "r") as file:
@@ -109,16 +113,22 @@ def remove_item(item_id):
         json.dump(file_data, file, indent=4)
 
 def update_item(item_id):
+    clear_console()
+
     # Read JSON
     with open("budget.json", "r+") as file:
         # Load JSON data
         file_data =  json.load(file)
 
+        i = 0
+        print("What would you like to update:")
+
         # Find the task by item_id
         for item in file_data["budget"]:
             if str(item["id"]) == str(item_id):
                 for key, value in item.items():
-                    print(f"{key}: {value}")
+                    print(f"[{i}]: {key}: {value}")
+                    i += 1
                 break
 
 
