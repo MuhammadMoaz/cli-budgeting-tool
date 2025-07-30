@@ -120,13 +120,13 @@ def update_item(item_id):
         # Load JSON data
         file_data =  json.load(file)
 
-        i = 0
+        i = 1
         print("What would you like to update:")
 
         # Find the task by item_id
         for item in file_data["budget"]:
             if str(item["id"]) == str(item_id):
-                for key, value in item.items():
+                for key, value in list(item.items())[1:]:
                     print(f"[{i}]: {key}: {value}")
                     i += 1
                 break
