@@ -3,7 +3,7 @@
     "budget": [
         {
             "id": 1,
-            "item_name": "Spotify",
+            "item_name": "Spotofy",
             "item_type": "Expense",
             "payment_amnt": 10,
             "payment_freq": "Monthly",

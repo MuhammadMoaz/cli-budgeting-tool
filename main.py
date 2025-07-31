@@ -17,6 +17,7 @@ def init_json():
 def clear_console():
     os.system('cls')
 
+# Add functions
 def generate_id():
     # Open JSON for reading
     with open("budget.json", "r") as file:
@@ -112,6 +113,14 @@ def remove_item(item_id):
         # Write updated JSON back to file
         json.dump(file_data, file, indent=4)
 
+# Update functions
+def get_item_to_update(item):
+    print("What would you like to update:")
+    i = 1
+    for key, value in list(item.items())[1:]:
+        print(f"[{i}]: {key}: {value}")
+        i += 1
+
 def update_item(item_id):
     clear_console()
 
@@ -120,15 +129,10 @@ def update_item(item_id):
         # Load JSON data
         file_data =  json.load(file)
 
-        i = 1
-        print("What would you like to update:")
-
         # Find the task by item_id
         for item in file_data["budget"]:
             if str(item["id"]) == str(item_id):
-                for key, value in list(item.items())[1:]:
-                    print(f"[{i}]: {key}: {value}")
-                    i += 1
+                get_item_to_update(item)
                 break
 
 
